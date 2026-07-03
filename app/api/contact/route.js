@@ -10,6 +10,10 @@ export async function POST(request) {
     return Response.json({ ok: false, errors: { form: 'Invalid request' } }, { status: 400 })
   }
 
+  if (body === null || typeof body !== 'object' || Array.isArray(body)) {
+    return Response.json({ ok: false, errors: { form: 'Invalid request' } }, { status: 400 })
+  }
+
   // Honeypot: real users never fill the hidden "website" field.
   // Return fake success so bots don't adapt; store nothing.
   if (body.website) return Response.json({ ok: true })

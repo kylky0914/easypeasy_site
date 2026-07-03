@@ -57,4 +57,22 @@ describe('validateContact', () => {
     expect(SERVICES).toContain('Not sure')
     expect(BUDGETS).toContain('Not sure yet')
   })
+
+  it('rejects a name over 100 characters', () => {
+    const r = validateContact({ ...valid, name: 'a'.repeat(101) })
+    expect(r.valid).toBe(false)
+    expect(r.errors.name).toBeTruthy()
+  })
+
+  it('rejects a message over 5000 characters', () => {
+    const r = validateContact({ ...valid, message: 'a'.repeat(5001) })
+    expect(r.valid).toBe(false)
+    expect(r.errors.message).toBeTruthy()
+  })
+
+  it('accepts a message of exactly 5000 characters', () => {
+    const r = validateContact({ ...valid, message: 'a'.repeat(5000) })
+    expect(r.valid).toBe(true)
+    expect(r.errors.message).toBeUndefined()
+  })
 })

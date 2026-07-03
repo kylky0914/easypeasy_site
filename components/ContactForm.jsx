@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { validateContact, SERVICES, BUDGETS } from '@/lib/validateContact'
 import { waLink } from '@/content/site'
 
@@ -35,6 +35,7 @@ export default function ContactForm() {
   const [fields, setFields] = useState(initialFields)
   const [errors, setErrors] = useState({})
   const [status, setStatus] = useState('idle') // idle | submitting | success | error
+  const successHeadingRef = useRef(null)
 
   // Read service pre-select + UTM params from the URL on mount (keeps page static)
   useEffect(() => {
@@ -48,6 +49,13 @@ export default function ContactForm() {
     }))
   }, [])
 
+  // Move focus to the success heading so screen-reader/keyboard users land on the
+  // confirmation instead of a form that just vanished. preventScroll avoids a jump
+  // since the panel already replaces the form in place.
+  useEffect(() => {
+    if (status === 'success') successHeadingRef.current?.focus({ preventScroll: true })
+  }, [status])
+
   function set(name) {
     return (e) => setFields((f) => ({ ...f, [name]: e.target.value }))
   }
@@ -56,7 +64,12 @@ export default function ContactForm() {
     e.preventDefault()
     const { valid, errors: fieldErrors } = validateContact(fields)
     setErrors(fieldErrors)
-    if (!valid) return
+    if (!valid) {
+      // Clear any stale server-error panel from a previous submit attempt so it
+      // doesn't linger alongside the fresh client-side field errors.
+      setStatus('idle')
+      return
+    }
 
     setStatus('submitting')
     try {
@@ -81,7 +94,7 @@ export default function ContactForm() {
   return (
     <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
       {status === 'success' ? (
-        <div className="py-4 text-center">
+        <div role="status" className="py-4 text-center">
           <div className="relative mx-auto flex h-14 w-14 items-center justify-center">
             <span
               aria-hidden="true"
@@ -93,7 +106,13 @@ export default function ContactForm() {
               </svg>
             </span>
           </div>
-          <h2 className="mt-6 font-display text-2xl font-bold text-slate-900">Thanks — we&rsquo;ve got it! 🎉</h2>
+          <h2
+            ref={successHeadingRef}
+            tabIndex={-1}
+            className="mt-6 font-display text-2xl font-bold text-slate-900 focus:outline-none"
+          >
+            Thanks — we&rsquo;ve got it! 🎉
+          </h2>
           <p className="mt-2 text-slate-700">
             We&rsquo;ll get back to you within 24 hours, usually much faster.
           </p>
@@ -186,7 +205,7 @@ export default function ContactForm() {
           </div>
 
           {status === 'error' && (
-            <div className="rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-700">
+            <div role="alert" className="rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-700">
               {errors.form || 'Something went wrong sending your message.'}{' '}
               <a
                 href={waLink()}

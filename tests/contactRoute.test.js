@@ -87,6 +87,32 @@ describe('POST /api/contact', () => {
     expect((await POST(req)).status).toBe(400)
   })
 
+  it('returns 400 on a JSON null body and stores nothing', async () => {
+    const req = new Request('http://localhost/api/contact', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: 'null',
+    })
+    const res = await POST(req)
+    expect(res.status).toBe(400)
+    const body = await res.json()
+    expect(body).toEqual({ ok: false, errors: { form: 'Invalid request' } })
+    expect(await readStored()).toHaveLength(0)
+  })
+
+  it('returns 400 on a JSON array body and stores nothing', async () => {
+    const req = new Request('http://localhost/api/contact', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: '[]',
+    })
+    const res = await POST(req)
+    expect(res.status).toBe(400)
+    const body = await res.json()
+    expect(body).toEqual({ ok: false, errors: { form: 'Invalid request' } })
+    expect(await readStored()).toHaveLength(0)
+  })
+
   it('rejects non-string field values with field errors instead of throwing', async () => {
     const res = await POST(makeRequest({ ...validBody, name: 5, email: ['x'] }))
     expect(res.status).toBe(400)

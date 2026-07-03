@@ -40,6 +40,23 @@ describe('saveSubmission', () => {
     expect(corruptContents).toBe('not json{{')
   })
 
+  it('quarantines a valid-JSON-but-non-array file instead of discarding it', async () => {
+    await fs.mkdir(path.dirname(tmpFile), { recursive: true })
+    await fs.writeFile(tmpFile, '{}')
+
+    expect(await saveSubmission({ name: 'D' })).toBe(1)
+
+    const stored = JSON.parse(await fs.readFile(tmpFile, 'utf8'))
+    expect(stored).toEqual([{ name: 'D' }])
+
+    const dir = path.dirname(tmpFile)
+    const files = await fs.readdir(dir)
+    const corruptFile = files.find((f) => /\.corrupt-\d+\.json$/.test(f))
+    expect(corruptFile).toBeTruthy()
+    const corruptContents = await fs.readFile(path.join(dir, corruptFile), 'utf8')
+    expect(corruptContents).toBe('{}')
+  })
+
   it('serializes concurrent saves so no lead is lost', async () => {
     const results = await Promise.all([
       saveSubmission({ name: '1' }),
