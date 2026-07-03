@@ -1,3 +1,65 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-paper font-body text-slate-700;
+  }
+
+  :focus-visible {
+    outline: 2px solid theme('colors.accent');
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+}
+
+@layer utilities {
+  /* Radial washes of accent + glow over an ink background. Usage:
+     <div aria-hidden="true" className="aurora" /> inside a `relative overflow-hidden` ink parent. */
+  .aurora {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+      radial-gradient(600px circle at 15% 20%, rgb(109 94 243 / 0.25), transparent 60%),
+      radial-gradient(520px circle at 85% 0%, rgb(34 211 238 / 0.16), transparent 60%);
+  }
+}
+
+/* Hero-style staggered load-in. Defined here for reuse by Task 7; respects reduced-motion. */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-up {
+    animation: fade-up 500ms ease-out both;
+  }
+
+  .animate-delay-1 {
+    animation-delay: 120ms;
+  }
+
+  .animate-delay-2 {
+    animation-delay: 240ms;
+  }
+
+  .animate-delay-3 {
+    animation-delay: 360ms;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-up {
+    opacity: 1;
+    transform: none;
+  }
+}
