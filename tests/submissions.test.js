@@ -22,4 +22,36 @@ describe('saveSubmission', () => {
     const stored = JSON.parse(await fs.readFile(tmpFile, 'utf8'))
     expect(stored.map((s) => s.name)).toEqual(['A', 'B'])
   })
+
+  it('preserves a corrupt existing file instead of discarding it', async () => {
+    await fs.mkdir(path.dirname(tmpFile), { recursive: true })
+    await fs.writeFile(tmpFile, 'not json{{')
+
+    expect(await saveSubmission({ name: 'C' })).toBe(1)
+
+    const stored = JSON.parse(await fs.readFile(tmpFile, 'utf8'))
+    expect(stored).toEqual([{ name: 'C' }])
+
+    const dir = path.dirname(tmpFile)
+    const files = await fs.readdir(dir)
+    const corruptFile = files.find((f) => /\.corrupt-\d+\.json$/.test(f))
+    expect(corruptFile).toBeTruthy()
+    const corruptContents = await fs.readFile(path.join(dir, corruptFile), 'utf8')
+    expect(corruptContents).toBe('not json{{')
+  })
+
+  it('serializes concurrent saves so no lead is lost', async () => {
+    const results = await Promise.all([
+      saveSubmission({ name: '1' }),
+      saveSubmission({ name: '2' }),
+      saveSubmission({ name: '3' }),
+      saveSubmission({ name: '4' }),
+      saveSubmission({ name: '5' }),
+    ])
+
+    expect(new Set(results)).toEqual(new Set([1, 2, 3, 4, 5]))
+
+    const stored = JSON.parse(await fs.readFile(tmpFile, 'utf8'))
+    expect(stored.length).toBe(5)
+  })
 })
