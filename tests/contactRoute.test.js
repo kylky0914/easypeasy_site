@@ -96,4 +96,22 @@ describe('POST /api/contact', () => {
     expect(body.errors.email).toBeTruthy()
     expect(await readStored()).toHaveLength(0)
   })
+
+  it('rejects a non-string service value and stores nothing', async () => {
+    const res = await POST(makeRequest({ ...validBody, service: 5 }))
+    expect(res.status).toBe(400)
+    const body = await res.json()
+    expect(body.ok).toBe(false)
+    expect(body.errors.service).toBeTruthy()
+    expect(await readStored()).toHaveLength(0)
+  })
+
+  it('rejects a non-string budget value and stores nothing', async () => {
+    const res = await POST(makeRequest({ ...validBody, budget: ['x'] }))
+    expect(res.status).toBe(400)
+    const body = await res.json()
+    expect(body.ok).toBe(false)
+    expect(body.errors.budget).toBeTruthy()
+    expect(await readStored()).toHaveLength(0)
+  })
 })
