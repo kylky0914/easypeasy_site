@@ -25,6 +25,20 @@
       radial-gradient(600px circle at 15% 20%, rgb(109 94 243 / 0.25), transparent 60%),
       radial-gradient(520px circle at 85% 0%, rgb(34 211 238 / 0.16), transparent 60%);
   }
+
+  /* Faint structural grid over ink hero/CTA sections. Usage:
+     <div aria-hidden="true" className="grid-overlay" /> inside a `relative` ink parent. */
+  .grid-overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+      linear-gradient(to right, rgb(255 255 255 / 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(255 255 255 / 0.05) 1px, transparent 1px);
+    background-size: 48px 48px;
+    -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 85%);
+    mask-image: radial-gradient(ellipse at center, black 40%, transparent 85%);
+  }
 }
 
 /* Hero-style staggered load-in. Defined here for reuse by Task 7; respects reduced-motion. */
