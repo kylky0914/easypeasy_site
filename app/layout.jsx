@@ -4,6 +4,7 @@ import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 import Analytics from '@/components/Analytics'
 import JsonLd from '@/components/JsonLd'
+import { LanguageProvider } from '@/components/LanguageProvider'
 import { site } from '@/content/site'
 
 const spaceGrotesk = Space_Grotesk({
@@ -54,9 +55,11 @@ export default function RootLayout({ children }) {
     <html lang="en" className={`${spaceGrotesk.variable} ${inter.variable} ${plexMono.variable}`}>
       <body className="antialiased">
         <JsonLd data={organizationJsonLd} />
-        <Nav />
-        <main>{children}</main>
-        <Footer />
+        <LanguageProvider>
+          <Nav />
+          <main>{children}</main>
+          <Footer />
+        </LanguageProvider>
         <Analytics />
       </body>
     </html>

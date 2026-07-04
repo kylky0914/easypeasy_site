@@ -8,6 +8,8 @@ import Faq from '@/components/Faq'
 import CtaBanner from '@/components/CtaBanner'
 import JsonLd from '@/components/JsonLd'
 import Reveal from '@/components/Reveal'
+import T from '@/components/T'
+import { pick } from '@/lib/i18n'
 import { site } from '@/content/site'
 import { services } from '@/content/services'
 import { caseStudies } from '@/content/caseStudies'
@@ -24,8 +26,8 @@ const faqJsonLd = {
   '@type': 'FAQPage',
   mainEntity: faqs.map((f) => ({
     '@type': 'Question',
-    name: f.q,
-    acceptedAnswer: { '@type': 'Answer', text: f.a },
+    name: pick(f.q, 'en'),
+    acceptedAnswer: { '@type': 'Answer', text: pick(f.a, 'en') },
   })),
 }
 
@@ -39,9 +41,9 @@ export default function HomePage() {
       <section className="bg-white py-20">
         <div className="mx-auto max-w-6xl px-4">
           <Reveal className="text-center">
-            <p className="font-mono text-xs uppercase tracking-[0.2em] text-accent-deep">// Services</p>
+            <p className="font-mono text-xs uppercase tracking-[0.2em] text-accent-deep"><T path="eyebrow.services" /></p>
             <h2 className="mt-3 font-display text-3xl font-bold text-slate-900 sm:text-4xl">
-              What we build for SMEs
+              <T path="home.servicesHeading" />
             </h2>
           </Reveal>
           <div className="mt-12 grid gap-6 sm:grid-cols-2">
@@ -56,7 +58,7 @@ export default function HomePage() {
               href="/services"
               className="font-semibold text-accent-deep transition-colors duration-200 hover:text-accent"
             >
-              See all services →
+              <T path="common.seeAllServices" />
             </Link>
           </p>
         </div>
@@ -65,8 +67,8 @@ export default function HomePage() {
       <section className="bg-paper py-20">
         <div className="mx-auto max-w-6xl px-4">
           <Reveal className="text-center">
-            <p className="font-mono text-xs uppercase tracking-[0.2em] text-accent-deep">// How it works</p>
-            <h2 className="mt-3 font-display text-3xl font-bold text-slate-900 sm:text-4xl">How it works</h2>
+            <p className="font-mono text-xs uppercase tracking-[0.2em] text-accent-deep"><T path="eyebrow.howItWorks" /></p>
+            <h2 className="mt-3 font-display text-3xl font-bold text-slate-900 sm:text-4xl"><T path="home.howItWorks" /></h2>
           </Reveal>
           <div className="mt-12">
             <ProcessSteps steps={site.process} />
@@ -77,14 +79,14 @@ export default function HomePage() {
       <section className="bg-white py-20">
         <div className="mx-auto max-w-6xl px-4">
           <Reveal className="text-center">
-            <p className="font-mono text-xs uppercase tracking-[0.2em] text-accent-deep">// Case studies</p>
+            <p className="font-mono text-xs uppercase tracking-[0.2em] text-accent-deep"><T path="eyebrow.caseStudies" /></p>
             <h2 className="mt-3 font-display text-3xl font-bold text-slate-900 sm:text-4xl">
-              Real problems, real results
+              <T path="home.caseStudiesHeading" />
             </h2>
           </Reveal>
           <div className="mt-12 grid gap-6 lg:grid-cols-3">
             {caseStudies.map((c, i) => (
-              <Reveal key={c.title} delay={i * 80}>
+              <Reveal key={c.title.en} delay={i * 80}>
                 <CaseStudyCard study={c} />
               </Reveal>
             ))}
@@ -94,7 +96,7 @@ export default function HomePage() {
               href="/case-studies"
               className="font-semibold text-accent-deep transition-colors duration-200 hover:text-accent"
             >
-              More case studies →
+              <T path="common.moreCaseStudies" />
             </Link>
           </p>
         </div>
@@ -103,8 +105,8 @@ export default function HomePage() {
       <section className="bg-paper py-20">
         <div className="mx-auto max-w-3xl px-4">
           <Reveal className="text-center">
-            <p className="font-mono text-xs uppercase tracking-[0.2em] text-accent-deep">// FAQ</p>
-            <h2 className="mt-3 font-display text-3xl font-bold text-slate-900 sm:text-4xl">Common questions</h2>
+            <p className="font-mono text-xs uppercase tracking-[0.2em] text-accent-deep"><T path="eyebrow.faq" /></p>
+            <h2 className="mt-3 font-display text-3xl font-bold text-slate-900 sm:text-4xl"><T path="home.faqHeading" /></h2>
           </Reveal>
           <div className="mt-12">
             <Faq items={faqs} />

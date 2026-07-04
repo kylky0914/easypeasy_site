@@ -1,7 +1,14 @@
+'use client'
+
 import Link from 'next/link'
 import { site } from '@/content/site'
+import { useT, usePick } from '@/components/LanguageProvider'
+import LanguageToggle from '@/components/LanguageToggle'
 
 export default function Nav() {
+  const t = useT()
+  const p = usePick()
+
   return (
     <header className="sticky top-0 z-40 border-b border-white/10 bg-ink/80 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3">
@@ -11,16 +18,19 @@ export default function Nav() {
         <nav aria-label="Main" className="hidden items-center gap-6 text-sm font-medium text-slate-300 sm:flex">
           {site.nav.map((item) => (
             <Link key={item.href} href={item.href} className="transition-colors duration-200 hover:text-white">
-              {item.label}
+              {p(item.label)}
             </Link>
           ))}
         </nav>
-        <Link
-          href="/contact"
-          className="rounded-xl bg-accent px-4 py-2 text-sm font-semibold text-white transition-colors duration-200 hover:bg-accent-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
-        >
-          Get Free AI Audit
-        </Link>
+        <div className="flex items-center gap-3">
+          <LanguageToggle />
+          <Link
+            href="/contact"
+            className="rounded-xl bg-accent px-4 py-2 text-sm font-semibold text-white transition-colors duration-200 hover:bg-accent-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
+          >
+            {t('nav.getAudit')}
+          </Link>
+        </div>
       </div>
     </header>
   )

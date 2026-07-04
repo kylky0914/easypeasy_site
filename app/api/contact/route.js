@@ -3,11 +3,13 @@ import { saveSubmission } from '@/lib/submissions'
 import { checkRateLimit } from '@/lib/rateLimit'
 
 export async function POST(request) {
+  // Form-level errors are returned as CODES (mapped to localized strings by the
+  // client via content/ui.js → form.errors.<code>).
   let body
   try {
     body = await request.json()
   } catch {
-    return Response.json({ ok: false, errors: { form: 'Invalid request' } }, { status: 400 })
+    return Response.json({ ok: false, errors: { form: 'invalid' } }, { status: 400 })
   }
 
   // Honeypot: real users never fill the hidden "website" field.
@@ -16,10 +18,7 @@ export async function POST(request) {
 
   const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown'
   if (!checkRateLimit(ip)) {
-    return Response.json(
-      { ok: false, errors: { form: 'Too many submissions — please try again later, or WhatsApp us directly.' } },
-      { status: 429 }
-    )
+    return Response.json({ ok: false, errors: { form: 'rateLimit' } }, { status: 429 })
   }
 
   const { valid, errors } = validateContact(body)
@@ -45,10 +44,7 @@ export async function POST(request) {
     await saveSubmission(submission)
   } catch (err) {
     console.error('Failed to save submission:', err)
-    return Response.json(
-      { ok: false, errors: { form: 'Something went wrong on our side — please WhatsApp us instead.' } },
-      { status: 500 }
-    )
+    return Response.json({ ok: false, errors: { form: 'saveError' } }, { status: 500 })
   }
 
   await sendNotificationEmail(submission)

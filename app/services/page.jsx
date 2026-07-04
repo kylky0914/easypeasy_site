@@ -1,6 +1,7 @@
 import ServiceCard from '@/components/ServiceCard'
 import CtaBanner from '@/components/CtaBanner'
 import Reveal from '@/components/Reveal'
+import T from '@/components/T'
 import { services } from '@/content/services'
 
 export const metadata = {
@@ -16,12 +17,12 @@ export default function ServicesPage() {
       <section className="bg-white py-20 sm:py-24">
         <div className="mx-auto max-w-6xl px-4">
           <Reveal className="text-center">
-            <p className="font-mono text-xs uppercase tracking-[0.2em] text-accent-deep">// Services</p>
+            <p className="font-mono text-xs uppercase tracking-[0.2em] text-accent-deep"><T path="eyebrow.services" /></p>
             <h1 className="mx-auto mt-3 max-w-3xl font-display text-4xl font-bold text-slate-900 sm:text-5xl">
-              AI services built for SMEs
+              <T path="services.pageTitle" />
             </h1>
             <p className="mx-auto mt-4 max-w-2xl text-slate-700">
-              No jargon, no bloated enterprise projects — practical AI that pays for itself, delivered in weeks.
+              <T path="services.pageIntro" />
             </p>
           </Reveal>
           <div className="mt-14 grid gap-6 sm:grid-cols-2">

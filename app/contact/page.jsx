@@ -1,6 +1,8 @@
 import ContactForm from '@/components/ContactForm'
 import WhatsAppButton from '@/components/WhatsAppButton'
 import Reveal from '@/components/Reveal'
+import T from '@/components/T'
+import Pick from '@/components/Pick'
 import { site } from '@/content/site'
 
 export const metadata = {
@@ -15,17 +17,16 @@ export default function ContactPage() {
     <section className="bg-paper py-20 sm:py-24">
       <div className="mx-auto max-w-3xl px-4">
         <Reveal className="text-center">
-          <p className="font-mono text-xs uppercase tracking-[0.2em] text-accent-deep">// Contact</p>
+          <p className="font-mono text-xs uppercase tracking-[0.2em] text-accent-deep"><T path="eyebrow.contact" /></p>
           <h1 className="mx-auto mt-3 font-display text-4xl font-bold text-slate-900 sm:text-5xl">
-            Get your free AI audit
+            <T path="contact.title" />
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-slate-700">
-            Tell us a little about your business — we&rsquo;ll reply with the highest-ROI automation opportunities
-            we see. {site.responsePromise}
+            <T path="contact.intro" /> <Pick value={site.responsePromise} />
           </p>
           <div className="mt-6">
             <WhatsAppButton
-              label="Prefer WhatsApp? Chat with us"
+              labelKey="contact.whatsappCta"
               className="!border-accent !text-accent-deep hover:!bg-accent/5 focus-visible:!ring-offset-paper"
             />
           </div>

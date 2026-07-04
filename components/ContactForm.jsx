@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { validateContact, SERVICES, BUDGETS } from '@/lib/validateContact'
 import { waLink } from '@/content/site'
+import { useT } from '@/components/LanguageProvider'
 
 // Maps /services/[slug] links (?service=slug) to dropdown values
 const SLUG_TO_SERVICE = {
@@ -32,9 +33,14 @@ const labelCls = 'block text-sm font-semibold text-slate-700'
 const errCls = 'mt-1 text-xs text-red-600'
 
 export default function ContactForm() {
+  const t = useT()
   const [fields, setFields] = useState(initialFields)
   const [errors, setErrors] = useState({})
   const [status, setStatus] = useState('idle') // idle | submitting | success | error
+
+  // Field/form errors are stored as CODES (from validateContact + the API); map them
+  // to localized strings at render time so switching language re-localizes live.
+  const errText = (code) => (code ? t(`form.errors.${code}`) : '')
 
   // Read service pre-select + UTM params from the URL on mount (keeps page static)
   useEffect(() => {
@@ -93,16 +99,16 @@ export default function ContactForm() {
               </svg>
             </span>
           </div>
-          <h2 className="mt-6 font-display text-2xl font-bold text-slate-900">Thanks — we&rsquo;ve got it! 🎉</h2>
+          <h2 className="mt-6 font-display text-2xl font-bold text-slate-900">{t('form.successTitle')}</h2>
           <p className="mt-2 text-slate-700">
-            We&rsquo;ll get back to you within 24 hours, usually much faster.
+            {t('form.successBody')}
           </p>
         </div>
       ) : (
         <form onSubmit={handleSubmit} noValidate className="space-y-5">
           <div className="grid gap-5 sm:grid-cols-2">
             <div>
-              <label htmlFor="name" className={labelCls}>Name *</label>
+              <label htmlFor="name" className={labelCls}>{t('form.name')} *</label>
               <input
                 id="name"
                 value={fields.name}
@@ -111,10 +117,10 @@ export default function ContactForm() {
                 aria-invalid={errors.name ? 'true' : undefined}
                 aria-describedby={errors.name ? 'name-error' : undefined}
               />
-              {errors.name && <p id="name-error" className={errCls}>{errors.name}</p>}
+              {errors.name && <p id="name-error" className={errCls}>{errText(errors.name)}</p>}
             </div>
             <div>
-              <label htmlFor="email" className={labelCls}>Email *</label>
+              <label htmlFor="email" className={labelCls}>{t('form.email')} *</label>
               <input
                 id="email"
                 type="email"
@@ -124,10 +130,10 @@ export default function ContactForm() {
                 aria-invalid={errors.email ? 'true' : undefined}
                 aria-describedby={errors.email ? 'email-error' : undefined}
               />
-              {errors.email && <p id="email-error" className={errCls}>{errors.email}</p>}
+              {errors.email && <p id="email-error" className={errCls}>{errText(errors.email)}</p>}
             </div>
             <div>
-              <label htmlFor="phone" className={labelCls}>Phone / WhatsApp *</label>
+              <label htmlFor="phone" className={labelCls}>{t('form.phone')} *</label>
               <input
                 id="phone"
                 value={fields.phone}
@@ -136,10 +142,10 @@ export default function ContactForm() {
                 aria-invalid={errors.phone ? 'true' : undefined}
                 aria-describedby={errors.phone ? 'phone-error' : undefined}
               />
-              {errors.phone && <p id="phone-error" className={errCls}>{errors.phone}</p>}
+              {errors.phone && <p id="phone-error" className={errCls}>{errText(errors.phone)}</p>}
             </div>
             <div>
-              <label htmlFor="company" className={labelCls}>Company *</label>
+              <label htmlFor="company" className={labelCls}>{t('form.company')} *</label>
               <input
                 id="company"
                 value={fields.company}
@@ -148,24 +154,24 @@ export default function ContactForm() {
                 aria-invalid={errors.company ? 'true' : undefined}
                 aria-describedby={errors.company ? 'company-error' : undefined}
               />
-              {errors.company && <p id="company-error" className={errCls}>{errors.company}</p>}
+              {errors.company && <p id="company-error" className={errCls}>{errText(errors.company)}</p>}
             </div>
             <div>
-              <label htmlFor="service" className={labelCls}>What do you need?</label>
+              <label htmlFor="service" className={labelCls}>{t('form.service')}</label>
               <select id="service" value={fields.service} onChange={set('service')} className={inputCls}>
-                {SERVICES.map((s) => <option key={s}>{s}</option>)}
+                {SERVICES.map((s) => <option key={s} value={s}>{t(`form.services.${s}`)}</option>)}
               </select>
             </div>
             <div>
-              <label htmlFor="budget" className={labelCls}>Estimated budget</label>
+              <label htmlFor="budget" className={labelCls}>{t('form.budget')}</label>
               <select id="budget" value={fields.budget} onChange={set('budget')} className={inputCls}>
-                {BUDGETS.map((b) => <option key={b}>{b}</option>)}
+                {BUDGETS.map((b) => <option key={b} value={b}>{t(`form.budgets.${b}`)}</option>)}
               </select>
             </div>
           </div>
           <div>
             <label htmlFor="message" className={labelCls}>
-              Tell us about your business &amp; what you&rsquo;d like to improve *
+              {t('form.message')} *
             </label>
             <textarea
               id="message"
@@ -176,7 +182,7 @@ export default function ContactForm() {
               aria-invalid={errors.message ? 'true' : undefined}
               aria-describedby={errors.message ? 'message-error' : undefined}
             />
-            {errors.message && <p id="message-error" className={errCls}>{errors.message}</p>}
+            {errors.message && <p id="message-error" className={errCls}>{errText(errors.message)}</p>}
           </div>
 
           {/* Honeypot — hidden from humans, bots fill it */}
@@ -187,14 +193,14 @@ export default function ContactForm() {
 
           {status === 'error' && (
             <div className="rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-700">
-              {errors.form || 'Something went wrong sending your message.'}{' '}
+              {errors.form ? errText(errors.form) : t('form.errors.generic')}{' '}
               <a
-                href={waLink()}
+                href={waLink(t('common.whatsappMessage'))}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="font-semibold text-accent-deep underline underline-offset-2 hover:text-accent"
               >
-                WhatsApp us instead →
+                {t('form.whatsappInstead')}
               </a>
             </div>
           )}
@@ -204,7 +210,7 @@ export default function ContactForm() {
             disabled={status === 'submitting'}
             className="w-full rounded-xl bg-accent px-6 py-3 font-semibold text-white transition-all duration-200 hover:bg-accent-deep disabled:cursor-not-allowed disabled:opacity-60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-white sm:w-auto"
           >
-            {status === 'submitting' ? 'Sending…' : 'Send — get your free audit'}
+            {status === 'submitting' ? t('form.submitting') : t('form.submit')}
           </button>
         </form>
       )}
