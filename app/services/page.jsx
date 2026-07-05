@@ -7,7 +7,7 @@ import { services } from '@/content/services'
 export const metadata = {
   title: 'AI Services for SMEs',
   description:
-    'AI workflow automation, chatbots, custom AI development and consulting for Singapore SMEs. Fixed-price, delivered in weeks.',
+    'AI workflow automation, WhatsApp chatbots, custom AI development and consulting for Singapore and Malaysia SMEs. Fixed-price, delivered in weeks.',
   alternates: { canonical: '/services' },
 }
 

@@ -9,7 +9,7 @@ export const services = [
       en: 'Turn repetitive admin — invoices, quotes, reports, data entry — into automated workflows.',
       zh: '将重复的行政工作 —— 发票、报价、报表、数据录入 —— 转化为自动化工作流。',
     },
-    metaDescription: 'AI workflow automation for Singapore SMEs. Automate invoicing, reporting and data entry with customized AI workflows. Free audit, fixed-price delivery.',
+    metaDescription: 'AI workflow automation for Singapore and Malaysia SMEs. Automate invoicing, reporting and data entry with customized AI workflows. Free audit, fixed-price delivery.',
     painPoints: [
       {
         en: 'Staff spend hours copying data between spreadsheets, emails and accounting software',
@@ -66,7 +66,7 @@ export const services = [
       en: 'Customer-service chatbots and WhatsApp agents that answer, qualify and book — 24/7.',
       zh: '全天候的客服聊天机器人与 WhatsApp 智能助手，能够回答、筛选并预约。',
     },
-    metaDescription: 'Custom AI chatbots and WhatsApp agents for Singapore SMEs. Answer customers, take orders and qualify leads 24/7. Free audit, fixed-price delivery.',
+    metaDescription: 'Custom AI chatbots and WhatsApp agents for Singapore and Malaysia SMEs. Answer customers, take orders and qualify leads 24/7. Free audit, fixed-price delivery.',
     painPoints: [
       {
         en: 'Customers message at 10pm and get answered at 10am — some never come back',
@@ -123,7 +123,7 @@ export const services = [
       en: 'Bespoke AI tools built around your data — document Q&A, search, analysis and more.',
       zh: '围绕您的数据打造的专属 AI 工具 —— 文档问答、搜索、分析等。',
     },
-    metaDescription: 'Custom AI development for Singapore SMEs — private document Q&A, AI search and analysis tools built on your business data. Free audit, fixed-price delivery.',
+    metaDescription: 'Custom AI development for Singapore and Malaysia SMEs — private document Q&A, AI search and analysis tools built on your business data. Free audit, fixed-price delivery.',
     painPoints: [
       {
         en: 'Your company knowledge lives in 500 PDFs nobody can search',
@@ -180,7 +180,7 @@ export const services = [
       en: 'Not sure where AI fits? We map your processes and find the highest-ROI opportunities.',
       zh: '不确定 AI 能用在哪里？我们会梳理您的流程，找出投资回报最高的机会。',
     },
-    metaDescription: 'AI consulting for Singapore SMEs. Practical AI roadmaps, process mapping and team training — find where AI actually pays off in your business.',
+    metaDescription: 'AI consulting for Singapore and Malaysia SMEs. Practical AI roadmaps, process mapping and team training — find where AI actually pays off in your business.',
     painPoints: [
       {
         en: 'Everyone says “use AI” but nobody says where it pays off in YOUR business',

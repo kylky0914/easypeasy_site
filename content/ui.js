@@ -14,7 +14,7 @@ export const ui = {
       moreCaseStudies: 'More case studies →',
       step: 'Step',
       whatsappUs: 'WhatsApp Us',
-      whatsappMessage: 'Hi EasyPeasy! I’d like a free AI audit for my business.',
+      whatsappMessage: 'Hi EPL AI! I’d like a free AI audit for my business.',
     },
     eyebrow: {
       services: '// Services',
@@ -56,7 +56,7 @@ export const ui = {
       illustrative: 'Illustrative example',
     },
     cta: {
-      heading: 'Ready to make work easy peasy?',
+      heading: 'Ready to make operations easier?',
       body:
         'Get a free AI audit — we’ll show you exactly where AI saves your business time and money.',
     },
@@ -117,7 +117,7 @@ export const ui = {
       },
     },
     agent: {
-      title: 'easypeasy agent',
+      title: 'EPL AI agent',
     },
     notFound: {
       eyebrow: '404 — task not found',
@@ -137,7 +137,7 @@ export const ui = {
       moreCaseStudies: '更多案例 →',
       step: '步骤',
       whatsappUs: 'WhatsApp 联系',
-      whatsappMessage: '你好 EasyPeasy！我想为我的企业申请免费的 AI 诊断。',
+      whatsappMessage: '你好 EPL AI！我想为我的企业申请免费的 AI 诊断。',
     },
     eyebrow: {
       services: '// 服务',
@@ -235,7 +235,7 @@ export const ui = {
       },
     },
     agent: {
-      title: 'easypeasy agent',
+      title: 'EPL AI agent',
     },
     notFound: {
       eyebrow: '404 —— 未找到页面',

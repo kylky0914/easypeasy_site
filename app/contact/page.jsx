@@ -8,7 +8,7 @@ import { site } from '@/content/site'
 export const metadata = {
   title: 'Contact — Free AI Audit',
   description:
-    'Get a free AI audit for your SME. Tell us how you work today and we’ll show you where AI saves time and money. Reply within 24 hours.',
+    'Get a free AI audit from EPL AI. Tell us how your SME works today and we’ll show where AI saves time and money.',
   alternates: { canonical: '/contact' },
 }
 

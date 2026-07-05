@@ -7,7 +7,7 @@ import { caseStudies } from '@/content/caseStudies'
 export const metadata = {
   title: 'Case Studies',
   description:
-    'How SMEs use customized AI to cut manual work — before/after examples with real impact metrics.',
+    'How Singapore and Malaysia SMEs use practical AI automation to cut manual work — before/after examples with impact metrics.',
   alternates: { canonical: '/case-studies' },
 }
 

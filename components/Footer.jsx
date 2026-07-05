@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { site, waLink } from '@/content/site'
 import { useT, usePick } from '@/components/LanguageProvider'
+import BrandLogo from '@/components/BrandLogo'
 
 export default function Footer() {
   const t = useT()
@@ -13,9 +14,7 @@ export default function Footer() {
       <div aria-hidden="true" className="aurora" />
       <div className="relative mx-auto grid max-w-6xl gap-8 px-4 py-12 sm:grid-cols-3">
         <div>
-          <p className="font-display text-lg font-bold text-white">
-            easy<span className="bg-gradient-to-r from-accent to-glow bg-clip-text text-transparent">peasy</span>
-          </p>
+          <BrandLogo showByline />
           <p className="mt-2 text-sm text-slate-400">{p(site.tagline)}</p>
           <p className="mt-2 text-sm text-slate-400">{p(site.address)}</p>
         </div>
@@ -41,7 +40,7 @@ export default function Footer() {
         </div>
       </div>
       <div className="relative border-t border-white/10 py-4 text-center text-xs text-slate-400">
-        © {new Date().getFullYear()} {site.name}. {t('footer.rights')}
+        © {new Date().getFullYear()} {site.name} by {site.legalName}. {t('footer.rights')}
       </div>
     </footer>
   )

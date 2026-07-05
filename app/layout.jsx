@@ -29,11 +29,11 @@ const plexMono = IBM_Plex_Mono({
 export const metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: 'EasyPeasy — Customized AI Solutions for Singapore SMEs',
-    template: '%s | EasyPeasy',
+    default: 'EPL AI | AI Automation for Singapore & Malaysia SMEs',
+    template: '%s | EPL AI',
   },
   description:
-    'EasyPeasy builds customized AI automations, chatbots and tools for Singapore SMEs. Free AI audit, fixed-price delivery, Singapore-based team.',
+    'EPL AI by EasyPeasy Labs builds AI workflow automation, WhatsApp agents, and custom AI tools for Singapore and Malaysia SMEs.',
   openGraph: {
     siteName: site.name,
     type: 'website',
@@ -45,9 +45,10 @@ const organizationJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
   name: site.name,
+  alternateName: site.legalName,
   url: site.url,
   email: site.email,
-  address: { '@type': 'PostalAddress', addressCountry: 'SG' },
+  areaServed: ['Singapore', 'Malaysia'],
 }
 
 export default function RootLayout({ children }) {

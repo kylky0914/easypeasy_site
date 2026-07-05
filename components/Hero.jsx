@@ -7,8 +7,8 @@ import { site } from '@/content/site'
 import { useT, usePick } from '@/components/LanguageProvider'
 
 // Wraps the exact-match substring of `text` in an accent gradient, without
-// altering the surrounding copy — used so the verbatim content/site.js
-// headline can still get the "easy peasy" gradient treatment from DESIGN.md.
+// altering the surrounding copy, so content/site.js stays the source of truth
+// while the main SEO phrase still gets a visual accent.
 // When the phrase isn't present (e.g. the Chinese headline), the text renders
 // unchanged.
 function GradientHighlight({ text, phrase }) {
@@ -39,7 +39,7 @@ export default function Hero() {
             {t('hero.eyebrow')}
           </p>
           <h1 className="animate-fade-up animate-delay-1 mx-auto mt-5 max-w-2xl font-display text-4xl font-bold tracking-tight text-white sm:text-5xl lg:mx-0">
-            <GradientHighlight text={p(site.hero.headline)} phrase="easy peasy" />
+            <GradientHighlight text={p(site.hero.headline)} phrase="AI automation" />
           </h1>
           <p className="animate-fade-up animate-delay-2 mx-auto mt-6 max-w-xl text-lg text-slate-300 lg:mx-0">
             {p(site.hero.sub)}

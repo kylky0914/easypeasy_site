@@ -2,27 +2,28 @@
 // Display strings are bilingual { en, zh }; structural fields (url, email, whatsapp, href)
 // stay plain. Resolve display strings with pick()/usePick() from lib/i18n.
 export const site = {
-  name: 'EasyPeasy',
+  name: 'EPL AI',
+  legalName: 'EasyPeasy Labs',
   tagline: {
-    en: 'Customized AI solutions for SMEs — made easy peasy.',
-    zh: '为中小企业量身定制的 AI 解决方案 —— 轻松搞定。',
+    en: 'AI automation for Singapore and Malaysia SMEs.',
+    zh: '为新加坡与马来西亚中小企业打造 AI 自动化。',
   },
-  url: process.env.NEXT_PUBLIC_SITE_URL || 'https://easypeasy.example.sg',
-  email: 'hello@easypeasy.example.sg',
+  url: process.env.NEXT_PUBLIC_SITE_URL || 'https://easypeasylabs.com',
+  email: 'hello@easypeasylabs.com',
   whatsapp: '6580000000', // digits only — used in wa.me links
-  address: { en: 'Singapore', zh: '新加坡' },
+  address: { en: 'Singapore & Malaysia', zh: '新加坡与马来西亚' },
   responsePromise: {
     en: 'We reply within 24 hours — usually much faster.',
     zh: '我们会在 24 小时内回复 —— 通常快得多。',
   },
   hero: {
     headline: {
-      en: 'Running your business on manual work? Let’s make it easy peasy.',
-      zh: '还在靠人手处理业务？让我们帮您轻松搞定。',
+      en: 'AI automation that keeps your business moving.',
+      zh: '让 AI 自动化推动您的业务持续运转。',
     },
     sub: {
-      en: 'We build customized AI automations, chatbots and tools for Singapore SMEs — so your team spends time on customers, not copy-paste.',
-      zh: '我们为新加坡中小企业打造定制化的 AI 自动化、聊天机器人和工具 —— 让您的团队专注于客户，而不是重复的复制粘贴。',
+      en: 'EPL AI by EasyPeasy Labs builds practical workflows, WhatsApp agents, and custom AI tools for Singapore and Malaysia SMEs.',
+      zh: 'EPL AI by EasyPeasy Labs 为新加坡与马来西亚中小企业打造实用的工作流、WhatsApp 智能助手和定制 AI 工具。',
     },
   },
   stats: [
@@ -35,8 +36,8 @@ export const site = {
       label: { en: 'typical delivery time', zh: '典型交付时间' },
     },
     {
-      value: { en: 'SG-based', zh: '本地团队' },
-      label: { en: 'team — no offshore handoffs', zh: '团队 —— 绝不外包海外' },
+      value: { en: 'SG + MY', zh: '新马' },
+      label: { en: 'market focus for regional SMEs', zh: '专注服务区域中小企业' },
     },
   ],
   process: [
@@ -84,5 +85,5 @@ export const site = {
   ],
 }
 
-export const waLink = (text = 'Hi EasyPeasy! I’d like a free AI audit for my business.') =>
+export const waLink = (text = 'Hi EPL AI! I’d like a free AI audit for my business.') =>
   `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(text)}`

@@ -3,7 +3,7 @@ import { services } from '@/content/services'
 
 export default function sitemap() {
   const now = new Date()
-  const staticRoutes = ['', '/services', '/case-studies', '/contact'].map((p) => ({
+  const staticRoutes = ['', '/sg', '/my', '/services', '/case-studies', '/contact'].map((p) => ({
     url: `${site.url}${p}`,
     lastModified: now,
   }))

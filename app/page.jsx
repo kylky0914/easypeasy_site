@@ -17,7 +17,7 @@ import { faqs } from '@/content/faq'
 
 export const metadata = {
   description:
-    'Customized AI automations, chatbots and tools for Singapore SMEs. Free AI audit within 48 hours, fixed-price delivery in 2–6 weeks.',
+    'EPL AI builds AI automations, WhatsApp agents, and custom tools for Singapore and Malaysia SMEs. Free audit within 48 hours.',
   alternates: { canonical: '/' },
 }
 

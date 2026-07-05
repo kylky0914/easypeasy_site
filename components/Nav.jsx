@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { site } from '@/content/site'
 import { useT, usePick } from '@/components/LanguageProvider'
 import LanguageToggle from '@/components/LanguageToggle'
+import BrandLogo from '@/components/BrandLogo'
 
 export default function Nav() {
   const t = useT()
@@ -12,8 +13,8 @@ export default function Nav() {
   return (
     <header className="sticky top-0 z-40 border-b border-white/10 bg-ink/80 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3">
-        <Link href="/" className="font-display text-xl font-bold tracking-tight text-white">
-          easy<span className="bg-gradient-to-r from-accent to-glow bg-clip-text text-transparent">peasy</span>
+        <Link href="/" className="shrink-0">
+          <BrandLogo />
         </Link>
         <nav aria-label="Main" className="hidden items-center gap-6 text-sm font-medium text-slate-300 sm:flex">
           {site.nav.map((item) => (
